@@ -24,6 +24,10 @@ public class TyperTextView extends HTextView {
     private Handler handler;
     private int charIncrease;
     private int typerSpeed;
+    private CharSequence[] entries;
+    private Boolean autoAnimate;
+    private int index;
+
     private AnimationListener animationListener;
 
     public TyperTextView(Context context) {
@@ -40,31 +44,31 @@ public class TyperTextView extends HTextView {
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.TyperTextView);
         typerSpeed = typedArray.getInt(R.styleable.TyperTextView_typerSpeed, 100);
         charIncrease = typedArray.getInt(R.styleable.TyperTextView_charIncrease, 2);
+        autoAnimate = typedArray.getBoolean(R.styleable.TyperTextView_autoAnimate, false);
+        entries = typedArray.getTextArray(R.styleable.TyperTextView_android_entries);
         typedArray.recycle();
 
         random = new Random();
         mText = getText();
-        handler = new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message msg) {
-                int currentLength = getText().length();
-                if (currentLength < mText.length()) {
-                    if (currentLength + charIncrease > mText.length()) {
-                        charIncrease = mText.length() - currentLength;
-                    }
-                    append(mText.subSequence(currentLength, currentLength + charIncrease));
-                    long randomTime = typerSpeed + random.nextInt(typerSpeed);
-                    Message message = Message.obtain();
-                    message.what = INVALIDATE;
-                    handler.sendMessageDelayed(message, randomTime);
-                    return false;
-                } else {
-                    if(animationListener != null) {
-                        animationListener.onAnimationEnd(TyperTextView.this);
-                    }
+        handler = new Handler(msg -> {
+            int currentLength = getText().length();
+            if (currentLength < mText.length()) {
+                if (currentLength + charIncrease > mText.length()) {
+                    charIncrease = mText.length() - currentLength;
                 }
+                append(mText.subSequence(currentLength, currentLength + charIncrease));
+                long randomTime = typerSpeed + random.nextInt(typerSpeed);
+                Message message = Message.obtain();
+                message.what = INVALIDATE;
+                handler.sendMessageDelayed(message, randomTime);
                 return false;
+            } else {
+                loopTextAnimation();
+                if (animationListener != null) {
+                    animationListener.onAnimationEnd(TyperTextView.this);
+                }
             }
+            return false;
         });
     }
 
@@ -90,6 +94,10 @@ public class TyperTextView extends HTextView {
         this.charIncrease = charIncrease;
     }
 
+    public void startTextAnimation() {
+        loopTextAnimation();
+    }
+
     @Override
     public void setProgress(float progress) {
         setText(mText.subSequence(0, (int) (mText.length() * progress)));
@@ -98,7 +106,7 @@ public class TyperTextView extends HTextView {
     @Override
     public void animateText(CharSequence text) {
         if (text == null) {
-            throw new RuntimeException("text must not  be null");
+            throw new RuntimeException("text must not be null");
         }
 
         mText = text;
@@ -106,6 +114,16 @@ public class TyperTextView extends HTextView {
         Message message = Message.obtain();
         message.what = INVALIDATE;
         handler.sendMessage(message);
+    }
+
+    private void loopTextAnimation() {
+        // auto loop animation
+        if (autoAnimate && entries != null && entries.length > 0) {
+            if (index + 1 >= entries.length) {
+                index = 0;
+            }
+            animateText(entries[index++]);
+        }
     }
 
     @Override

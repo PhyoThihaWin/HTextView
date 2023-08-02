@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.demoapp">
+    package="com.example.demoapp">
 
     <application
         android:allowBackup="true"
@@ -9,24 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LineTextViewActivity">
-        </activity>
-        <activity android:name=".FadeTextViewActivity">
-        </activity>
-        <activity android:name=".RainbowTextViewActivity">
-        </activity>
-        <activity android:name=".TyperTextViewActivity">
-        </activity>
-        <activity android:name=".ScaleTextViewActivity">
-        </activity>
-        <activity android:name=".EvaporateTextViewActivity">
-        </activity>
-        <activity android:name=".FallTextViewActivity">
-        </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".LineTextViewActivity"></activity>
+        <activity android:name=".FadeTextViewActivity"></activity>
+        <activity android:name=".RainbowTextViewActivity"></activity>
+        <activity android:name=".TyperTextViewActivity"></activity>
+        <activity android:name=".ScaleTextViewActivity"></activity>
+        <activity android:name=".EvaporateTextViewActivity"></activity>
+        <activity android:name=".FallTextViewActivity"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

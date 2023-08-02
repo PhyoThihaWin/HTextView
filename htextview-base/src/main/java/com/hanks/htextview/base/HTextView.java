@@ -1,5 +1,6 @@
 package com.hanks.htextview.base;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;
@@ -9,6 +10,7 @@ import android.widget.TextView;
  * Created by hanks on 2017/3/13.
  */
 
+@SuppressLint("AppCompatCustomView")
 public abstract class HTextView extends TextView {
     public HTextView(Context context) {
         this(context, null);

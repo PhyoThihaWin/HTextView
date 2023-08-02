@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,8 +12,13 @@
         android:id="@+id/textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#2f00"
-        android:lineSpacingMultiplier="1.5" />
+        android:entries="@array/AnimateText"
+        android:lineSpacingMultiplier="1.5"
+        android:text="this is init sentence."
+        android:fontFamily="@font/poppins_regular"
+        app:autoAnimate="true"
+        app:charIncrease="3"
+        app:typerSpeed="80" />
 
     <com.hanks.htextview.typer.TyperTextView
         android:id="@+id/textview2"
@@ -22,8 +26,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="#2f00"
+        android:entries="@array/AnimateText"
         android:lineSpacingMultiplier="1.5"
         android:text="this is init sentence."
+        app:autoAnimate="true"
         app:charIncrease="3"
-        app:typerSpeed="80"/>
+        app:typerSpeed="80" />
+
 </LinearLayout>

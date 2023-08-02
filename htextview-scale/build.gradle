@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion compile_version
-    buildToolsVersion buildToolsVer
     defaultConfig {
         minSdkVersion min_version
         targetSdkVersion target_version
@@ -24,17 +23,4 @@ android {
 dependencies {
     implementation (project(':htextview-base')) { transitive = true }
 //    implementation "com.hanks:htextview-base:$library_version"
-}
-
-if (enable_bintray) {
-    apply plugin: 'com.novoda.bintray-release'
-    publish {
-        userOrg = 'hanks-zyh'
-        groupId = 'com.hanks'
-        uploadName = 'ScaleTextView'
-        artifactId = 'htextview-scale'
-        publishVersion = library_version
-        desc = 'ScaleTextView'
-        website = 'https://github.com/hanks-zyh/HTextView'
-    }
 }

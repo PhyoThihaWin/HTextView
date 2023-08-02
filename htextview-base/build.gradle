@@ -3,7 +3,6 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion compile_version
-    buildToolsVersion buildToolsVer
     defaultConfig {
         minSdkVersion min_version
         targetSdkVersion target_version
@@ -23,19 +22,6 @@ android {
 }
 
 dependencies {
-    implementation "com.android.support:appcompat-v7:$support_version"
-}
-
-if (enable_bintray) {
-    apply plugin: 'com.novoda.bintray-release'
-
-    publish {
-        userOrg = 'hanks-zyh'
-        groupId = 'com.hanks'
-        uploadName = "HTextViewBase"
-        artifactId = 'htextview-base'
-        publishVersion = library_version
-        desc = 'HTextViewBase'
-        website = 'https://github.com/hanks-zyh/HTextView'
-    }
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
 }

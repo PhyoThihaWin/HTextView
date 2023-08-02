@@ -3,5 +3,7 @@
     <declare-styleable name="TyperTextView">
         <attr name="typerSpeed" format="integer" />
         <attr name="charIncrease" format="integer" />
+        <attr name="autoAnimate" format="boolean" />
+        <attr name="android:entries" />
     </declare-styleable>
 </resources>
